@@ -1,25 +1,15 @@
 package com.zzg.imagedemo.controller;
 
 import cn.hutool.core.date.DateUtil;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.zzg.imagedemo.domain.Image;
 import com.zzg.imagedemo.mapper.ImageMapper;
-import com.zzg.imagedemo.service.ImageService;
 import com.zzg.imagedemo.util.GetImageUtil;
 import com.zzg.imagedemo.util.GetURL;
 import com.zzg.imagedemo.util.OSSUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
-import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
-
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
 import java.util.UUID;
 
 import static com.zzg.imagedemo.util.GetImageUtil.downLoadFromUrl;
@@ -58,7 +48,7 @@ public class ImgController {
         String imageUrl = OSSUtil.uploadfile(filePath, objectName);
         Image image = new Image();
         image.setImageUrl(imageUrl);
-        imgManager.insert(image);
+        imgManager.addImage(image);
 
         /**
          * 删除文件

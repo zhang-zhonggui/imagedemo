@@ -1,9 +1,11 @@
 package com.zzg.imagedemo.controller;
 
+import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.zzg.imagedemo.service.ImageService;
+import com.zzg.imagedemo.util.GetImageUtil;
 import com.zzg.imagedemo.util.GetURL;
 import com.zzg.imagedemo.util.OSSUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +42,7 @@ public class ImgController {
         /**
          *下载文件
          */
-        String s = UUID.randomUUID().toString();
+        String s = UUID.randomUUID()+"——"+ DateUtil.today();
         s=s+".jpg";
         downLoadFromUrl(url, s, "./img");
         /**
@@ -48,12 +50,16 @@ public class ImgController {
          * static String objectName = "3e022a6e-848a-4e2a-90c0-f31f52a74b01.jpg";
          * static String filePath = "./img/3e022a6e-848a-4e2a-90c0-f31f52a74b01.jpg";
          */
-        String filePath = ".\\img\\" + s;
+        String filePath = "./img/" + s;
         String objectName = s;
         String imageUrl = OSSUtil.uploadfile(filePath, objectName);
 
-
-
+        /**
+         * 删除文件
+         * deleteFile
+         */
+        boolean b = GetImageUtil.deleteFile(filePath);
+        System.out.println(b);
         return imageUrl;
     }
 }

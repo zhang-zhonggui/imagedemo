@@ -25,8 +25,6 @@ public class GetURL {
         JSONArray data = (JSONArray) params.get("data");
         JSONObject imgUrl = (JSONObject) data.get(0);
         String url = imgUrl.get("imgurl").toString();
-
-
         return  url;
     }
 }

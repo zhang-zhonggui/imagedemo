@@ -1,9 +1,11 @@
 package com.zzg.imagedemo.util;
 
 import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
 public class GetImageUtil {
     public static byte[] readInputStream(InputStream inputStream) throws IOException {
         byte[] buffer = new byte[1024];
@@ -15,6 +17,7 @@ public class GetImageUtil {
         bos.close();
         return bos.toByteArray();
     }
+
     /**
      * 从网络Url中下载文件
      *
@@ -59,6 +62,28 @@ public class GetImageUtil {
         return "";
     }
 
+    public static boolean deleteFile(String fileName) {
+
+
+        File file = new File(fileName);//根据指定的文件名创建File对象
+
+        if (file.exists() && file.isFile()) { //要删除的文件存在且是文件
+
+            if (file.delete()) {
+                System.out.println("文件" + fileName + "删除成功！");
+                return true;
+            } else {
+                System.out.println("文件" + fileName + "删除失败！");
+                return false;
+            }
+        } else {
+
+            System.out.println("文件" + fileName + "不存在，删除失败！");
+            return false;
+        }
+
+
+    }
 
 
 }

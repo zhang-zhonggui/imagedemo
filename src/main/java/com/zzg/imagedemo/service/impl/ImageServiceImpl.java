@@ -1,9 +1,9 @@
 package com.zzg.imagedemo.service.impl;
 
+import com.zzg.imagedemo.mapper.ImageMapper;
 import com.zzg.imagedemo.service.ImageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
 /**
  * @author ：zzg
  * @description：
@@ -11,8 +11,10 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Service
 public class ImageServiceImpl implements ImageService {
-    @Override
-    public void addImage(MultipartFile multipartFile) {
 
-    }
+
+    @Autowired
+    private ImageMapper imgManager;
+
+
 }

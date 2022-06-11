@@ -4,6 +4,8 @@ import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.zzg.imagedemo.domain.Image;
+import com.zzg.imagedemo.mapper.ImageMapper;
 import com.zzg.imagedemo.service.ImageService;
 import com.zzg.imagedemo.util.GetImageUtil;
 import com.zzg.imagedemo.util.GetURL;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.UUID;
@@ -31,7 +34,7 @@ import static com.zzg.imagedemo.util.GetImageUtil.downLoadFromUrl;
 public class ImgController {
 
     @Autowired
-    private ImageService imageService;
+    private ImageMapper imgManager;
 
     @GetMapping("add")
     public Object addImage() {
@@ -42,8 +45,8 @@ public class ImgController {
         /**
          *下载文件
          */
-        String s = UUID.randomUUID()+"——"+ DateUtil.today();
-        s=s+".jpg";
+        String s = UUID.randomUUID() + "——" + DateUtil.today();
+        s = s + ".jpg";
         downLoadFromUrl(url, s, "./img");
         /**
          * 上传文件
@@ -53,6 +56,9 @@ public class ImgController {
         String filePath = "./img/" + s;
         String objectName = s;
         String imageUrl = OSSUtil.uploadfile(filePath, objectName);
+        Image image = new Image();
+        image.setImageUrl(imageUrl);
+        imgManager.insert(image);
 
         /**
          * 删除文件
@@ -60,6 +66,12 @@ public class ImgController {
          */
         boolean b = GetImageUtil.deleteFile(filePath);
         System.out.println(b);
+
+
+        /**
+         * 返回图片路径
+         */
         return imageUrl;
+
     }
 }

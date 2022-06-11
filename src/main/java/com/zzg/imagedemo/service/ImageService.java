@@ -8,5 +8,5 @@ import org.springframework.web.multipart.MultipartFile;
  * @date ：2022/6/9 21:33
  */
 public interface ImageService {
-    void addImage(MultipartFile multipartFile);
+
 }

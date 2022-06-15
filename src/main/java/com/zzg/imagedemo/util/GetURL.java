@@ -12,6 +12,12 @@ import java.util.HashMap;
 
 public class GetURL {
 
+    /**
+     * 木小果api
+     *
+     * @param uri
+     * @return
+     */
     public static String getMuXiAoGuo(String uri) {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().set(1, new StringHttpMessageConverter(StandardCharsets.UTF_8));
@@ -25,6 +31,13 @@ public class GetURL {
         JSONArray data = (JSONArray) params.get("data");
         JSONObject imgUrl = (JSONObject) data.get(0);
         String url = imgUrl.get("imgurl").toString();
-        return  url;
+        return url;
+    }
+
+    /**
+     * 小白api
+     */
+    public static String getXioaBai() {
+        return "https://api.xiaobaibk.com/api/pic/?pic=meizi";
     }
 }

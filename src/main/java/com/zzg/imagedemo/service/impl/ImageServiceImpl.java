@@ -30,12 +30,12 @@ public class ImageServiceImpl implements ImageService {
         /**
          * 提取图片路径
          */
-        String url = GetURL.getMuXiAoGuo("https://api.muxiaoguo.cn/api/meinvtu?api_key=8f7a6f99b7425c71&num=1");
+       // String url = GetURL.getMuXiAoGuo("https://api.muxiaoguo.cn/api/meinvtu?api_key=8f7a6f99b7425c71&num=1");
+        String url = GetURL.getXioaBai();
         /**
          *下载文件
          */
-        String s = UUID.randomUUID() + "——" + DateUtil.today();
-        s = s + ".jpg";
+        String s = UUID.randomUUID() +".jpg";
         downLoadFromUrl(url, s, "./img");
         /**
          * 上传文件
@@ -61,7 +61,7 @@ public class ImageServiceImpl implements ImageService {
          * 返回图片路径
          */
 
-        addImage();
+      //  addImage();
         return imageUrl;
     }
 }
